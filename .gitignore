@@ -1,0 +1,9 @@
+.env
+.env.test
+node_modules
+config/**/*
+dist/**/*
+dist
+config/config.json
+.github/*
+.github
