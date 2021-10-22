@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator')
 
 const createUser = require("../actions/createUser")
-const { sendVerificationMail } = require("../actions/sendEmails")
+const sendMails = require("../actions/sendEmails")
 
 exports.postRegisterUser = async (req, res, next) => {
   try {
@@ -17,7 +17,7 @@ exports.postRegisterUser = async (req, res, next) => {
 
     const user = await createUser.createUser(body)
 
-    sendVerificationMail(user)
+    sendMails.sendVerificationMail(user)
 
     res.status(201).json({
       message: "User created successfully!",

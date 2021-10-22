@@ -6,11 +6,7 @@ const db = require("../../models")
 const { decodeToken } = require("../utils/jwtHelpers")
 const loginUser = require("../actions/loginUser")
 const { getExpiry } = require("../utils/cookieHelpers")
-const {
-  sendPasswordResetMail,
-  sendPasswordUpdateMail,
-  sendVerificationMail,
-} = require("../actions/sendEmails")
+const sendMails = require("../actions/sendEmails")
 const filterUser = require("../actions/filterUser")
 
 exports.postLogin = async (req, res, next) => {
@@ -82,7 +78,7 @@ exports.postLogout = async (req, res, next) => {
 
 exports.postResendVerificationMail = async (req, res, next) => {
   try {
-    sendVerificationMail(req.user)
+    sendMails.sendVerificationMail(req.user)
     res.status(200).json({
       message: "Verification email resent successfully",
     })
@@ -151,7 +147,7 @@ exports.postPasswordReset = async (req, res, next) => {
       error.statusCode = 404
       throw error
     }
-    const token = sendPasswordResetMail(user)
+    const token = sendMails.sendPasswordResetMail(user)
 
     user.password_reset_token = token
     await user.save()
@@ -202,7 +198,7 @@ exports.patchPasswordUpdate = async (req, res, next) => {
       const error = new Error("Password update failed!")
       throw error
     }
-    sendPasswordUpdateMail(updatedUser[1][0].dataValues)
+    sendMails.sendPasswordUpdateMail(updatedUser[1][0].dataValues)
 
     res.status(200).json({
       message: "Password successfully updated",

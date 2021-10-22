@@ -1,8 +1,8 @@
 module.exports = (req, res, next) => {
   try {
     if (req.params.userId !== req.user.id) {
-      const error = new MyError("Forbidden", 403)
-
+      const error = new Error("Forbidden")
+      error.statusCode = 403
       throw error
     }
     next()

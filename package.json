@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "mocha",
+    "migrate:test": "NODE_ENV=test npx sequelize-cli db:migrate",
     "dev": "nodemon ./src/app.js",
     "start": "node ./src/app.js"
   },
