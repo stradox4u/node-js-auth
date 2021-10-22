@@ -1,9 +1,23 @@
 {
+  "development": {
+    "username": "postgres",
+    "password": "password",
+    "database": "node-js-auth",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
   "test": {
     "username": "postgres",
     "password": "password",
     "database": "node-js-auth-testing",
     "host": "localhost",
     "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }
